@@ -1,104 +1,85 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>motivos de amar tanto meu bichinho</title>
+    <title>Estudo de Psicopatologia</title>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #e0f7fa, #ffecb3);
-            color: #37474f;
-            padding: 40px;
-            margin: 0;
-        }
-        h1 {
-            font-size: 3.5em;
-            color: #607d8b;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        .container {
-            max-width: 700px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-        }
-        .item {
-            font-size: 1.4em;
-            margin: 15px 0;
-            background: #ffcc80;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            text-transform: capitalize;
-        }
-        .item:hover {
-            background: #ffb74d;
-            transform: scale(1.05);
-        }
-        .hidden {
-            display: none;
-            margin-top: 10px;
-            font-size: 1.1em;
-            color: #607d8b;
-            font-style: italic;
-        }
-        .footer {
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #607d8b;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+        .card { background: white; padding: 20px; margin: 20px; display: inline-block; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); width: 80%; max-width: 600px; }
+        .hidden { display: none; }
+        button { padding: 10px 20px; margin: 10px; cursor: pointer; }
     </style>
-    <script>
-        function toggleText(id) {
-            var element = document.getElementById(id);
-            element.style.display = element.style.display === "none" ? "block" : "none";
-        }
-    </script>
 </head>
 <body>
-    <h1>motivos de amar tanto o meu bicinho</h1>
-    <div class="container">
-        <div class="item" onclick="toggleText('motivo1')">1. toque para revelar</div>
-        <div id="motivo1" class="hidden">você é muito incrível, gostosa e estilosa</div>
-        
-        <div class="item" onclick="toggleText('motivo2')">2. toque para revelar</div>
-        <div id="motivo2" class="hidden">é muito cheirosa (menos o peido kk)</div>
-        
-        <div class="item" onclick="toggleText('motivo3')">3. toque para revelar</div>
-        <div id="motivo3" class="hidden">é o amor da minha vida e futura mãe dos meus filhos</div>
-        
-        <div class="item" onclick="toggleText('motivo4')">4. toque para revelar</div>
-        <div id="motivo4" class="hidden"> é linda demais, se eu fosse hetero semn noção ia ser minha inimiga por ser TÃO linda</div>
-        
-        <div class="item" onclick="toggleText('motivo5')">5. toque para revelar</div>
-        <div id="motivo5" class="hidden">tua companhia é a melhor do mundo</div>
-        
-        <div class="item" onclick="toggleText('motivo6')">6. toque para revelar</div>
-        <div id="motivo6" class="hidden">vc me ama muito, dá pra perceber porque ninguém nunca ficou tanto tempo sem reclamar de mim</div>
-        
-        <div class="item" onclick="toggleText('motivo7')">7. toque para revelar</div>
-        <div id="motivo7" class="hidden">tu é MUITO engraçada e ilumina meu dia todos os dias</div>
-        
-        <div class="item" onclick="toggleText('motivo8')">8. toque para revelar</div>
-        <div id="motivo8" class="hidden">me conhece muito bem, parece que lê minha mente e mina expressãokk</div>
-        
-        <div class="item" onclick="toggleText('motivo9')">9. toque para revelar</div>
-        <div id="motivo9" class="hidden">tem muito mais motivos... mas eu precisaria de uma eternidade para listar tudo</div>
+    <h1>Estudo de Psicopatologia</h1>
+    
+    <div class="card">
+        <h2>Cartões de Estudo</h2>
+        <p id="flashcard">Clique para ver a definição</p>
+        <button onclick="mostrarDefinicao()">Ver Resposta</button>
     </div>
-
-    <div class="footer">
-        <p>e isso é só um pedacinho do que você representa para mim.</p>
+    
+    <div class="card">
+        <h2>Quiz</h2>
+        <p id="pergunta"></p>
+        <div id="opcoes"></div>
+        <p id="resultado" class="hidden"></p>
     </div>
+    
+    <script>
+        let flashcards = [
+            { pergunta: "O que é psicopatologia?", resposta: "É o estudo dos transtornos mentais." },
+            { pergunta: "O que é o DSM?", resposta: "É o Manual Diagnóstico e Estatístico de Transtornos Mentais." },
+            { pergunta: "O que caracteriza um transtorno mental?", resposta: "Um padrão de comportamento ou pensamento que causa sofrimento ou disfunção." },
+            { pergunta: "Quais são os principais transtornos de ansiedade?", resposta: "Transtorno de pânico, fobias, transtorno de ansiedade generalizada." },
+            { pergunta: "O que é transtorno depressivo maior?", resposta: "É um transtorno caracterizado por humor deprimido persistente e perda de interesse em atividades." },
+            { pergunta: "Quais são os sintomas da esquizofrenia?", resposta: "Alucinações, delírios, pensamento desorganizado e comportamento motor anormal." }
+        ];
+        
+        let perguntasQuiz = [
+            { pergunta: "O que significa DSM?", opcoes: ["A) Um transtorno mental", "B) Um manual de diagnóstico", "C) Um tratamento terapêutico"], resposta: "B" },
+            { pergunta: "Qual transtorno está associado a oscilações de humor extremas?", opcoes: ["A) Esquizofrenia", "B) Transtorno de Ansiedade", "C) Transtorno Bipolar"], resposta: "C" },
+            { pergunta: "Qual abordagem terapêutica é baseada na análise dos pensamentos?", opcoes: ["A) Terapia Cognitivo-Comportamental", "B) Psicanálise", "C) Terapia Humanista"], resposta: "A" },
+            { pergunta: "Quais são os principais tipos de transtorno de ansiedade?", opcoes: ["A) Transtorno de pânico e TOC", "B) Transtorno bipolar e fobia social", "C) Esquizofrenia e TDAH"], resposta: "A" },
+            { pergunta: "O que é um transtorno obsessivo-compulsivo (TOC)?", opcoes: ["A) Um tipo de psicose", "B) Um transtorno de ansiedade caracterizado por obsessões e compulsões", "C) Um transtorno alimentar"], resposta: "B" }
+        ];
+        
+        let indexFlashcard = 0;
+        let indexQuiz = 0;
+        
+        function mostrarDefinicao() {
+            document.getElementById('flashcard').innerText = flashcards[indexFlashcard].resposta;
+            indexFlashcard = (indexFlashcard + 1) % flashcards.length;
+        }
+        
+        function carregarPerguntaQuiz() {
+            let perguntaAtual = perguntasQuiz[indexQuiz];
+            document.getElementById('pergunta').innerText = perguntaAtual.pergunta;
+            let opcoesDiv = document.getElementById('opcoes');
+            opcoesDiv.innerHTML = "";
+            
+            perguntaAtual.opcoes.forEach((opcao, i) => {
+                let botao = document.createElement("button");
+                botao.innerText = opcao;
+                botao.onclick = () => responderQuiz(String.fromCharCode(65 + i));
+                opcoesDiv.appendChild(botao);
+            });
+        }
+        
+        function responderQuiz(opcao) {
+            let correta = opcao === perguntasQuiz[indexQuiz].resposta;
+            document.getElementById('resultado').innerText = correta ? "Correto!" : "Errado! Tente novamente.";
+            document.getElementById('resultado').classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('resultado').classList.add('hidden');
+                indexQuiz = (indexQuiz + 1) % perguntasQuiz.length;
+                carregarPerguntaQuiz();
+            }, 2000);
+        }
+        
+        carregarPerguntaQuiz();
+    </script>
 </body>
 </html>
