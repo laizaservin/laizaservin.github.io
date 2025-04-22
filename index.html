@@ -1,85 +1,65 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudo de Psicopatologia</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
-        .card { background: white; padding: 20px; margin: 20px; display: inline-block; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); width: 80%; max-width: 600px; }
-        .hidden { display: none; }
-        button { padding: 10px 20px; margin: 10px; cursor: pointer; }
-    </style>
+  <meta charset="UTF-8">
+  <title>missão confidencial // operação 240425</title>
+  <style>
+    body {
+      background-color: #0c0c0c;
+      color: #d3d3d3;
+      font-family: 'Courier New', monospace;
+      padding: 50px;
+      text-align: left;
+    }
+    .terminal {
+      background-color: #1a1a1a;
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 750px;
+      margin: auto;
+      box-shadow: 0 0 15px #ff69b4;
+    }
+    .linha {
+      margin-bottom: 18px;
+    }
+    button {
+      background-color: #ff69b4;
+      color: #fff;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    #resposta {
+      color: #7fff00;
+      margin-top: 30px;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <h1>Estudo de Psicopatologia</h1>
-    
-    <div class="card">
-        <h2>Cartões de Estudo</h2>
-        <p id="flashcard">Clique para ver a definição</p>
-        <button onclick="mostrarDefinicao()">Ver Resposta</button>
-    </div>
-    
-    <div class="card">
-        <h2>Quiz</h2>
-        <p id="pergunta"></p>
-        <div id="opcoes"></div>
-        <p id="resultado" class="hidden"></p>
-    </div>
-    
-    <script>
-        let flashcards = [
-            { pergunta: "O que é psicopatologia?", resposta: "É o estudo dos transtornos mentais." },
-            { pergunta: "O que é o DSM?", resposta: "É o Manual Diagnóstico e Estatístico de Transtornos Mentais." },
-            { pergunta: "O que caracteriza um transtorno mental?", resposta: "Um padrão de comportamento ou pensamento que causa sofrimento ou disfunção." },
-            { pergunta: "Quais são os principais transtornos de ansiedade?", resposta: "Transtorno de pânico, fobias, transtorno de ansiedade generalizada." },
-            { pergunta: "O que é transtorno depressivo maior?", resposta: "É um transtorno caracterizado por humor deprimido persistente e perda de interesse em atividades." },
-            { pergunta: "Quais são os sintomas da esquizofrenia?", resposta: "Alucinações, delírios, pensamento desorganizado e comportamento motor anormal." }
-        ];
-        
-        let perguntasQuiz = [
-            { pergunta: "O que significa DSM?", opcoes: ["A) Um transtorno mental", "B) Um manual de diagnóstico", "C) Um tratamento terapêutico"], resposta: "B" },
-            { pergunta: "Qual transtorno está associado a oscilações de humor extremas?", opcoes: ["A) Esquizofrenia", "B) Transtorno de Ansiedade", "C) Transtorno Bipolar"], resposta: "C" },
-            { pergunta: "Qual abordagem terapêutica é baseada na análise dos pensamentos?", opcoes: ["A) Terapia Cognitivo-Comportamental", "B) Psicanálise", "C) Terapia Humanista"], resposta: "A" },
-            { pergunta: "Quais são os principais tipos de transtorno de ansiedade?", opcoes: ["A) Transtorno de pânico e TOC", "B) Transtorno bipolar e fobia social", "C) Esquizofrenia e TDAH"], resposta: "A" },
-            { pergunta: "O que é um transtorno obsessivo-compulsivo (TOC)?", opcoes: ["A) Um tipo de psicose", "B) Um transtorno de ansiedade caracterizado por obsessões e compulsões", "C) Um transtorno alimentar"], resposta: "B" }
-        ];
-        
-        let indexFlashcard = 0;
-        let indexQuiz = 0;
-        
-        function mostrarDefinicao() {
-            document.getElementById('flashcard').innerText = flashcards[indexFlashcard].resposta;
-            indexFlashcard = (indexFlashcard + 1) % flashcards.length;
-        }
-        
-        function carregarPerguntaQuiz() {
-            let perguntaAtual = perguntasQuiz[indexQuiz];
-            document.getElementById('pergunta').innerText = perguntaAtual.pergunta;
-            let opcoesDiv = document.getElementById('opcoes');
-            opcoesDiv.innerHTML = "";
-            
-            perguntaAtual.opcoes.forEach((opcao, i) => {
-                let botao = document.createElement("button");
-                botao.innerText = opcao;
-                botao.onclick = () => responderQuiz(String.fromCharCode(65 + i));
-                opcoesDiv.appendChild(botao);
-            });
-        }
-        
-        function responderQuiz(opcao) {
-            let correta = opcao === perguntasQuiz[indexQuiz].resposta;
-            document.getElementById('resultado').innerText = correta ? "Correto!" : "Errado! Tente novamente.";
-            document.getElementById('resultado').classList.remove('hidden');
-            
-            setTimeout(() => {
-                document.getElementById('resultado').classList.add('hidden');
-                indexQuiz = (indexQuiz + 1) % perguntasQuiz.length;
-                carregarPerguntaQuiz();
-            }, 2000);
-        }
-        
-        carregarPerguntaQuiz();
-    </script>
+  <div class="terminal">
+    <div class="linha">log 00:42 - acesso ao sistema autorizado</div>
+    <div class="linha">agente: djennifer figueredo da silva</div>
+    <div class="linha">status: convocação prioritária para operação 240425</div>
+    <div class="linha">detalhes disponíveis apenas para olhos confiáveis</div>
+    <div class="linha">informações iniciais: local discreto, ambiente isolado, dispositivo ps5 em prontidão, presença obrigatória de alto nível de afeto</div>
+    <div class="linha">confirma participação com sua amada (vulgo eu vei) nos dias 24 e 25?</div>
+    <button id="botaoSim">sim</button>
+    <div id="resposta">informação liberada: eu amo você</div>
+  </div>
+
+  <script>
+    const botaoSim = document.getElementById('botaoSim');
+    const resposta = document.getElementById('resposta');
+
+    botaoSim.addEventListener('click', () => {
+      resposta.style.display = 'block';
+    });
+  </script>
 </body>
 </html>
