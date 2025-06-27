@@ -1,64 +1,176 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>missão confidencial // operação 240425</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoSchool - Cadastro de Aluno</title>
   <style>
     body {
-      background-color: #0c0c0c;
-      color: #d3d3d3;
-      font-family: 'Courier New', monospace;
-      padding: 50px;
-      text-align: left;
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 0;
     }
-    .terminal {
-      background-color: #1a1a1a;
-      border: 2px solid #333;
+
+    header {
+      background-color: #183b59;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 25px;
       border-radius: 10px;
-      padding: 30px;
-      max-width: 750px;
-      margin: auto;
-      box-shadow: 0 0 15px #ff69b4;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
-    .linha {
-      margin-bottom: 18px;
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
     }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
     button {
-      background-color: #ff69b4;
-      color: #fff;
-      padding: 10px 25px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #267bbd;
+      color: white;
       border: none;
       border-radius: 5px;
-      font-size: 16px;
       cursor: pointer;
-      margin-top: 20px;
     }
-    #resposta {
-      color: #7fff00;
-      margin-top: 30px;
+
+    button:hover {
+      background-color: #1e5e92;
+    }
+
+    .message {
+      margin-top: 20px;
       font-weight: bold;
-      display: none;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f0f0;
     }
   </style>
 </head>
 <body>
-  <div class="terminal">
-    <div class="linha">log 00:42 - acesso ao sistema autorizado</div>
-    <div class="linha">agente: djennifer figueredo da silva</div>
-    <div class="linha">status: convocação prioritária para operação 240425</div>
-    <div class="linha">detalhes disponíveis apenas para olhos confiáveis</div>
-    <div class="linha">informações iniciais: local discreto, ambiente isolado, dispositivo ps5 em prontidão, presença obrigatória de alto nível de afeto</div>
-    <div class="linha">confirma participação com sua amada (vulgo eu vei) nos dias 24 e 25?</div>
-    <button id="botaoSim">sim</button>
-    <div id="resposta">informação liberada: eu amo você</div>
-  </div>
+  <header>
+    <h1>GoSchool - Cadastro de Aluno</h1>
+    <span>Secretário(a) • <a href="#" style="color:#fff;">Sair</a></span>
+  </header>
+
+  <main>
+    <form id="cadastroAluno">
+      <label for="nome">Nome Completo:</label>
+      <input type="text" id="nome" required />
+
+      <label for="nascimento">Data de Nascimento:</label>
+      <input type="date" id="nascimento" required />
+
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" required />
+
+      <label for="telefone">Telefone:</label>
+      <input type="tel" id="telefone" required />
+
+      <label for="curso">Curso:</label>
+      <select id="curso" required>
+        <option value="">Selecione...</option>
+        <option value="Informática">Técnico em Informática</option>
+        <option value="Enfermagem">Técnico em Enfermagem</option>
+        <option value="Administração">Técnico em Administração</option>
+      </select>
+
+      <button type="submit">Salvar</button>
+
+      <div id="mensagem" class="message"></div>
+    </form>
+
+    <h2>Alunos Cadastrados</h2>
+    <table id="tabelaAlunos">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Curso</th>
+          <th>Data de Nascimento</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
 
   <script>
-    const botaoSim = document.getElementById('botaoSim');
-    const resposta = document.getElementById('resposta');
+    const form = document.getElementById("cadastroAluno");
+    const mensagem = document.getElementById("mensagem");
+    const tabela = document.querySelector("#tabelaAlunos tbody");
 
-    botaoSim.addEventListener('click', () => {
-      resposta.style.display = 'block';
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const nascimento = document.getElementById("nascimento").value;
+      const email = document.getElementById("email").value.trim();
+      const telefone = document.getElementById("telefone").value.trim();
+      const curso = document.getElementById("curso").value;
+
+      if (!nome || !nascimento || !email || !telefone || !curso) {
+        mensagem.textContent = "⚠️ Preencha todos os campos obrigatórios.";
+        mensagem.className = "message error";
+        return;
+      }
+
+      const novaLinha = document.createElement("tr");
+      novaLinha.innerHTML = `
+        <td>${nome}</td>
+        <td>${curso}</td>
+        <td>${nascimento}</td>
+      `;
+      tabela.appendChild(novaLinha);
+
+      mensagem.textContent = "✔️ Aluno cadastrado com sucesso!";
+      mensagem.className = "message success";
+
+      form.reset();
     });
   </script>
 </body>
