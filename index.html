@@ -1,177 +1,112 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GoSchool - Cadastro de Aluno</title>
+  <meta charset="UTF-8">
+  <title>10 meses com você</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f9fc;
       margin: 0;
       padding: 0;
-    }
-
-    header {
-      background-color: #183b59;
-      color: white;
-      padding: 15px 30px;
+      background-color: #fafafa;
+      font-family: 'Courier New', monospace;
+      color: #333;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-transform: lowercase;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 22px;
+    .card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
+      max-width: 600px;
+      text-align: center;
+      display: none;
+      animation: fadeIn 1s ease forwards;
     }
 
-    main {
-      max-width: 700px;
-      margin: 30px auto;
-      background-color: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    h1 {
+      font-size: 2rem;
+      color: #444;
+      margin-bottom: 20px;
     }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #666;
     }
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    .heart {
+      font-size: 2rem;
+      margin-top: 20px;
+      color: #e87d7d;
+      animation: pulse 1.5s infinite;
+    }
+
+    .assinatura {
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #999;
     }
 
     button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #267bbd;
-      color: white;
+      background-color: #e87d7d;
       border: none;
-      border-radius: 5px;
+      border-radius: 30px;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1rem;
       cursor: pointer;
+      text-transform: lowercase;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     button:hover {
-      background-color: #1e5e92;
+      background-color: #d36c6c;
     }
 
-    .message {
-      margin-top: 20px;
-      font-weight: bold;
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
 
-    .success {
-      color: green;
-    }
-
-    .error {
-      color: red;
-    }
-
-    table {
-      width: 100%;
-      margin-top: 30px;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f0f0f0;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>GoSchool - Cadastro de Aluno</h1>
-    <span>Secretário(a) • <a href="#" style="color:#fff;">Sair</a></span>
-  </header>
+  <button onclick="mostrarMensagem()">clique aqui :)</button>
 
-  <main>
-    <form id="cadastroAluno">
-      <label for="nome">Nome Completo:</label>
-      <input type="text" id="nome" required />
-
-      <label for="nascimento">Data de Nascimento:</label>
-      <input type="date" id="nascimento" required />
-
-      <label for="email">E-mail:</label>
-      <input type="email" id="email" required />
-
-      <label for="telefone">Telefone:</label>
-      <input type="tel" id="telefone" required />
-
-      <label for="curso">Curso:</label>
-      <select id="curso" required>
-        <option value="">Selecione...</option>
-        <option value="Graduação">Engenharia de Software</option>
-        <option value="Graduação">Engenharia mecanica</option>
-        <option value="Graduação">Sistemas de Informação</option>
-      </select>
-
-      <button type="submit">Salvar</button>
-
-      <div id="mensagem" class="message"></div>
-    </form>
-
-    <h2>Alunos Cadastrados</h2>
-    <table id="tabelaAlunos">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Curso</th>
-          <th>Data de Nascimento</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </main>
+  <div class="card" id="mensagem">
+    <h1>10 meses com você</h1>
+    <p>
+      voce com toda certeza foi a melhor coisa que aconteceu cmg.<br>
+      seu amor me acalma, me inspira, me faz ver o lado bom do amor.<br>
+      voce faz tudo ficar mais fácil.<br><br>
+      nada nesse mundo vai te mostrar o amor que eu sinto por voce.<br>
+      e quando te vejo. eu te amo.<br><br>
+      quero muuuuuito mais que 10 meses ao seu lado.<br>
+      é igual o mano jb cantou:<br>
+      a eternidade com vc não é o suficiente.
+    </p>
+    <div class="heart">♡</div>
+    <div class="assinatura">de: láiza<br>para: djennifer &lt;3</div>
+  </div>
 
   <script>
-    const form = document.getElementById("cadastroAluno");
-    const mensagem = document.getElementById("mensagem");
-    const tabela = document.querySelector("#tabelaAlunos tbody");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const nome = document.getElementById("nome").value.trim();
-      const nascimento = document.getElementById("nascimento").value;
-      const email = document.getElementById("email").value.trim();
-      const telefone = document.getElementById("telefone").value.trim();
-      const curso = document.getElementById("curso").value;
-
-      if (!nome || !nascimento || !email || !telefone || !curso) {
-        mensagem.textContent = "⚠️ Preencha todos os campos obrigatórios.";
-        mensagem.className = "message error";
-        return;
-      }
-
-      const novaLinha = document.createElement("tr");
-      novaLinha.innerHTML = `
-        <td>${nome}</td>
-        <td>${curso}</td>
-        <td>${nascimento}</td>
-      `;
-      tabela.appendChild(novaLinha);
-
-      mensagem.textContent = "✔️ Aluno cadastrado com sucesso!";
-      mensagem.className = "message success";
-
-      form.reset();
-    });
+    function mostrarMensagem() {
+      document.getElementById('mensagem').style.display = 'block';
+    }
   </script>
 </body>
 </html>
