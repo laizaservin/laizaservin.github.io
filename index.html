@@ -1,112 +1,55 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>10 meses com você</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #fafafa;
-      font-family: 'Courier New', monospace;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-transform: lowercase;
-    }
+def cadastrar_candidatos():
+    candidatos = {}
+    qtd = int(input("Quantos candidatos deseja cadastrar? "))
+    
+    for i in range(qtd):
+        nome = input(f"Nome do candidato {i+1}: ")
+        numero = int(input(f"Número do candidato {i+1}: "))
+        while numero in candidatos:  # garante que não terá número repetido
+            print("⚠ Número já usado! Digite outro.")
+            numero = int(input(f"Número do candidato {i+1}: "))
+        candidatos[numero] = {"nome": nome, "votos": 0}
+    return candidatos
 
-    .card {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
-      max-width: 600px;
-      text-align: center;
-      display: none;
-      animation: fadeIn 1s ease forwards;
-    }
 
-    h1 {
-      font-size: 2rem;
-      color: #444;
-      margin-bottom: 20px;
-    }
+def realizar_votacao(candidatos):
+    qtd_eleitores = int(input("\nQuantos eleitores irão votar? "))
+    
+    for i in range(qtd_eleitores):
+        print(f"\n--- Eleitor {i+1} ---")
+        print("Lista de candidatos:")
+        for numero, dados in candidatos.items():
+            print(f"{numero} - {dados['nome']}")
+        
+        voto = int(input("Digite o número do candidato escolhido: "))
+        while voto not in candidatos:
+            print("⚠ Voto inválido! Digite um número válido da lista.")
+            voto = int(input("Digite o número do candidato escolhido: "))
+        candidatos[voto]["votos"] += 1
+    
+    return qtd_eleitores
 
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #666;
-    }
 
-    .heart {
-      font-size: 2rem;
-      margin-top: 20px;
-      color: #e87d7d;
-      animation: pulse 1.5s infinite;
-    }
+def mostrar_resultados(candidatos, total_votos):
+    print("\n===== RESULTADOS =====")
+    # Ordenar por quantidade de votos (maior para menor)
+    ranking = sorted(candidatos.items(), key=lambda item: item[1]["votos"], reverse=True)
+    
+    for numero, dados in ranking:
+        porcentagem = (dados["votos"] / total_votos) * 100
+        print(f"{dados['nome']} ({numero}) - {dados['votos']} votos ({porcentagem:.2f}%)")
+    
+    # Identificar vencedor
+    vencedor = ranking[0]
+    print(f"\n🏆 VENCEDOR: {vencedor[1]['nome']} ({vencedor[0]}) com {vencedor[1]['votos']} votos!")
 
-    .assinatura {
-      margin-top: 30px;
-      font-size: 1rem;
-      color: #999;
-    }
 
-    button {
-      background-color: #e87d7d;
-      border: none;
-      border-radius: 30px;
-      color: white;
-      padding: 12px 24px;
-      font-size: 1rem;
-      cursor: pointer;
-      text-transform: lowercase;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
+def main():
+    print("=== Sistema de Votação para Síndico ===")
+    candidatos = cadastrar_candidatos()
+    total_votos = realizar_votacao(candidatos)
+    mostrar_resultados(candidatos, total_votos)
 
-    button:hover {
-      background-color: #d36c6c;
-    }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-  <button onclick="mostrarMensagem()">clique aqui :)</button>
-
-  <div class="card" id="mensagem">
-    <h1>10 meses com você</h1>
-    <p>
-      voce com toda certeza foi a melhor coisa que aconteceu cmg.<br>
-      seu amor me acalma, me inspira, me faz ver o lado bom do amor.<br>
-      voce faz tudo ficar mais fácil.<br><br>
-      nada nesse mundo vai te mostrar o amor que eu sinto por voce.<br>
-      e quando te vejo. eu te amo.<br><br>
-      quero muuuuuito mais que 10 meses ao seu lado.<br>
-      é igual o mano jb cantou:<br>
-      a eternidade com vc não é o suficiente.
-    </p>
-    <div class="heart">♡</div>
-    <div class="assinatura">de: láiza<br>para: djennifer &lt;3</div>
-  </div>
-
-  <script>
-    function mostrarMensagem() {
-      document.getElementById('mensagem').style.display = 'block';
-    }
-  </script>
-</body>
-</html>
+if __name__ == "__main__":
+    main()
